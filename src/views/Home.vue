@@ -3,8 +3,8 @@
   <div class="home">
     <div class="container">
       <p>Home page</p>
-      </div>
     </div>
+  </div>
 </template>
 
 

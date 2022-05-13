@@ -1,5 +1,6 @@
 <template>
   <div class="auth">
+    <div class="back-img"></div>
     <div class="form-container">
       <div v-if="isLogin">
         <h2 class="my-3 text-center">Login</h2>
@@ -28,7 +29,7 @@ import Signup from '../components/auth/signup.vue'
 export default {
   data() {
     return {
-      isLogin: false
+      isLogin: false,
     }
   },
   components: {
@@ -48,6 +49,14 @@ export default {
   justify-content: center;
   background-image: linear-gradient(0deg,#f58740,#f06352);
   height: 100vh;
+}
+.auth .back-img {
+  position: absolute;
+  height: 100vh;
+  width: 100%;
+  z-index: 2;
+  background-image: url(../assets/back-img.png);
+  background-size: cover;
 }
 .form-container {
   background: white;
