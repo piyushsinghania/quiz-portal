@@ -43,6 +43,15 @@ export default {
   max-width: 100%;
   height: auto;
 }
+@media only screen and (max-width: 1200px) {
+  .hero {
+    padding: 60px 30px;
+    margin: 20px auto;
+  }
+  .hero-details > h2 {
+    font-size: 24px;
+  }
+}
 @media only screen and (max-width: 768px) {
   .hero {
     flex-direction: column;
@@ -56,9 +65,6 @@ export default {
     margin-bottom: 64px;
     text-align: center;
     margin: 16px 24px;
-  }
-  .hero-details > h2 {
-    font-size: 24px;
   }
 }
 @media only screen and (max-width: 576px) {
