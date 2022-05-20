@@ -4,7 +4,12 @@
       <div class="card-body">
         <h5 class="card-title">{{ subject.title }}</h5>
         <p class="card-text">{{ subject.description }}</p>
-        <a href="#" class="btn btn-outline-primary">Appear</a>
+        <RouterLink
+          :to="`/subjects/${subject.id}/questions`"
+          class="btn btn-outline-primary"
+        >
+          Appear
+        </RouterLink>
       </div>
     </div>
   </div>

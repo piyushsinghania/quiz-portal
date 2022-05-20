@@ -37,7 +37,6 @@ export default {
       const res = await getSubjects()
       if (res.status === 200) {
         this.subjects = res.data;
-        console.log(res)
       } else {
         throw new Error("No subjects found");
       }
