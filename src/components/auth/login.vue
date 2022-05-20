@@ -14,8 +14,7 @@
 </template>
 
 <script>
-import { login } from '../../api/index'
-import axios from 'axios';
+import { login, http } from '../../api/index'
 
 export default {
   data() {
@@ -39,7 +38,7 @@ export default {
 
         const { data } = await login(credentials)
         localStorage.setItem('accessToken', JSON.stringify(data.access_token))
-        axios.defaults.headers.common['Authorization'] =
+        http.defaults.headers.common['Authorization'] =
           `Bearer ${data.access_token}`
 
         this.$router.push({ name: 'subjects' })
