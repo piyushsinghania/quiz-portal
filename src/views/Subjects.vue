@@ -1,7 +1,7 @@
 <template>
   <Navbar />
   <div class="container">
-    <div class="subjects" v-if="subjects.length">
+    <div class="row" v-if="subjects.length">
       <Subject
         v-for="subject in subjects"
         :subject="subject"
