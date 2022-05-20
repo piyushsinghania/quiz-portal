@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <QuizExam />
+    <QuizExam :questions="questions" />
     <Questioncloud class="questions-bar" />
   </div>
 </template>
@@ -8,11 +8,26 @@
 <script>
 import QuizExam from '../components/exam/QuizExam.vue'
 import Questioncloud from '../components/exam/Questioncloud.vue'
+import { getSubjectQuestions } from '../api/index'
 
 export default {
   components: {
     QuizExam,
     Questioncloud
+  },
+  data() {
+    return {
+      questions: [],
+    }
+  },
+  props: ['subjectId'],
+  async mounted() {
+    try {
+      const res = await getSubjectQuestions(this.subjectId);
+      this.questions = res.data;
+    } catch(e) {
+      console.log(e.message);
+    }
   }
 }
 </script>

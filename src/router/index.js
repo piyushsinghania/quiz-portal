@@ -35,15 +35,15 @@ const router = createRouter({
       component: Auth
     },
     {
-      path: '/exams',
-      name: 'exams',
-      component: Exams,
-      // beforeEnter: requireAuth
-    },
-    {
       path: '/subjects',
       name: 'subjects',
       component: Subjects
+    },
+    {
+      path: '/subjects/:subjectId/questions',
+      name: 'exams',
+      component: Exams,
+      props: true
     }
   ]
 })

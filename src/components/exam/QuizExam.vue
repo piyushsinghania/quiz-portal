@@ -16,23 +16,24 @@ export default {
     Question,
     Navbar
   },
+  props: ['questions'],
   data() {
     return {
-      questions: [
-        {
-          question: "Why we have to wake up at 8?",
-          options: [
-            "We should not wake up",
-            "We have lab classes"
-          ]
-        },
-        {
-          question: "Why do we need to go to college?",
-          options: [
-            "Because college will give degree"
-          ]
-        }
-      ]
+      // questions: [
+      //   {
+      //     question: "Why we have to wake up at 8?",
+      //     options: [
+      //       "We should not wake up",
+      //       "We have lab classes"
+      //     ]
+      //   },
+      //   {
+      //     question: "Why do we need to go to college?",
+      //     options: [
+      //       "Because college will give degree"
+      //     ]
+      //   }
+      // ]
     }
   },
 }
