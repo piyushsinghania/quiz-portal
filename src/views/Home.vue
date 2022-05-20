@@ -5,7 +5,7 @@
       <div class="hero-details">
         <h2 class="my-md-3">Take the first step to know your depth!</h2>
         <p class="my-md-3">India's #1 free online quiz platform</p>
-        <RouterLink to="/auth/login" class="btn btn-primary my-lg-3">Take Exam</RouterLink>
+        <RouterLink to="/exams" class="btn btn-primary my-lg-3">Take Exam</RouterLink>
       </div>
       <div class="hero-img">
         <img class="hero-img" src="../assets/study-for-exam.png" alt="">
