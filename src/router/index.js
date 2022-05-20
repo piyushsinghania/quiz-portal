@@ -4,6 +4,17 @@ import About from '../views/About.vue'
 import Auth from '../views/Auth.vue'
 import Exams from '../views/Exams.vue'
 
+const requireAuth = (to, from, next) => {
+  if (
+    localStorage.getItem("isAuthenticated") === "false" ||
+    localStorage.getItem("isAuthenticated") === null
+  ) {
+    next("/auth/login");
+  } else {
+    next();
+  }
+};
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -25,7 +36,8 @@ const router = createRouter({
     {
       path: '/exams',
       name: 'exams',
-      component: Exams
+      component: Exams,
+      beforeEnter: requireAuth
     }
   ]
 })
