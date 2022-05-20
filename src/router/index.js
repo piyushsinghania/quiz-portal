@@ -3,16 +3,17 @@ import Home from '../views/Home.vue'
 import About from '../views/About.vue'
 import Auth from '../views/Auth.vue'
 import Exams from '../views/Exams.vue'
+import Subjects from '../views/Subjects.vue'
 
 const requireAuth = (to, from, next) => {
-  if (
-    localStorage.getItem("isAuthenticated") === "false" ||
-    localStorage.getItem("isAuthenticated") === null
-  ) {
-    next("/auth/login");
-  } else {
-    next();
-  }
+  // if (
+  //   localStorage.getItem("isAuthenticated") === "false" ||
+  //   localStorage.getItem("isAuthenticated") === null
+  // ) {
+  //   next("/auth/login");
+  // } else {
+  //   next();
+  // }
 };
 
 const router = createRouter({
@@ -37,7 +38,12 @@ const router = createRouter({
       path: '/exams',
       name: 'exams',
       component: Exams,
-      beforeEnter: requireAuth
+      // beforeEnter: requireAuth
+    },
+    {
+      path: '/subjects',
+      name: 'subjects',
+      component: Subjects
     }
   ]
 })

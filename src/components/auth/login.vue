@@ -9,22 +9,45 @@
       <input type="password" class="form-control" required id="password" v-model="password" />
     </div>
     <div class="error">{{ error }}</div>
-    <button class="btn form-btn w-100 mb-3">Log in</button>
+    <button class="btn form-btn w-100 mb-3" :class="isLoading ? 'disabled' : ''">Log in</button>
   </form>
 </template>
 
 <script>
+import { login } from '../../api/index'
+import axios from 'axios';
+
 export default {
   data() {
     return {
       email: '',
       password: '',
-      error: ''
+      error: '',
+      isLoading: false,
     }
   },
   methods: {
-    handleSubmit() {
-      console.log(this.email, this.password)
+    async handleSubmit() {
+      try {
+        this.isLoading = true;
+        this.error = '';
+
+        const credentials = {
+          email: this.email,
+          password: this.password
+        }
+
+        const { data } = await login(credentials)
+        localStorage.setItem('accessToken', JSON.stringify(data.access_token))
+        axios.defaults.headers.common['Authorization'] =
+          `Bearer ${data.access_token}`
+
+        this.$router.push({ name: 'subjects' })
+      } catch(e) {
+        this.error = e.response.data.message
+      } finally {
+        this.isLoading = false;
+      }
     }
   }
 }
