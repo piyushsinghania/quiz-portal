@@ -1,8 +1,10 @@
 <template>
-  <div class="container">
-    <nav class="navbar navbar-expand-lg navbar-light portal-navbar">
+  <nav class="navbar navbar-expand-lg navbar-light portal-navbar mb-3">
+    <div class="container">
       <span class="navbar-brand">Quiz Platform</span>
-    </nav>
+    </div>
+  </nav>
+  <div class="container">
     <div class="row">
       <div class="col-sm-12 col-lg-9">
         <QuizExam

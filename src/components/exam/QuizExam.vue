@@ -1,11 +1,21 @@
 <template>
-  <div class="questions" v-if="!isLoading">
-    <h4 class="my-3">{{ question.question_text }}</h4>
-    <div class="form-check mt-3" v-for="option in question.question_options">
-      <input class="form-check-input" type="checkbox" :value="option.option_text" :id="option.id">
-      <label class="form-check-label" :for="option.id">
-        {{ option.option_text }}
-      </label>
+  <div class="container" v-if="!isLoading">
+    <h4 class="my-3">
+      <span class="q-number"> Q. {{ question.order }}&#41; </span>
+      {{ question.question_text }}
+    </h4>
+    <div class="options">
+      <div class="form-check mt-3" v-for="option in question.question_options">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          :value="option.option_text"
+          :id="option.id"
+        />
+        <label class="form-check-label" :for="option.id">
+          {{ option.option_text }}
+        </label>
+      </div>
     </div>
   </div>
   <Spinner v-else />
@@ -17,72 +27,67 @@
     >
       Prev
     </button>
-    <button
-      class="btn btn-outline-primary"
-      @click="handleNext"
-    >
-      Next
-    </button>
+    <button class="btn btn-outline-primary" @click="handleNext">Next</button>
   </div>
   <p class="error">{{ error }}</p>
 </template>
 
 <script>
-import Navbar from '../Navbar.vue'
-import Spinner from '../Spinner.vue'
-import { getSubjectQuestionDetail } from '../../api/index'
+import Navbar from '../Navbar.vue';
+import Spinner from '../Spinner.vue';
+import { getSubjectQuestionDetail } from '../../api/index';
 
 export default {
   components: {
     Navbar,
-    Spinner
+    Spinner,
   },
   props: ['subjectId', 'order'],
   data() {
     return {
       isLoading: false,
       error: '',
-      question: {}
-    }
+      question: {},
+    };
   },
-  emits: ["updateOrder"],
+  emits: ['updateOrder'],
   watch: {
     order: {
       immediate: true,
       handler(val, oldVal) {
-        this.getQuestion(val)
-      }
-    }
+        this.getQuestion(val);
+      },
+    },
   },
   methods: {
     handleNext() {
-      this.$emit('updateOrder', this.order + 1)
+      this.$emit('updateOrder', this.order + 1);
     },
     handlePrev() {
-      this.$emit('updateOrder', this.order - 1)
+      this.$emit('updateOrder', this.order - 1);
     },
     async getQuestion(order) {
       try {
         this.isLoading = true;
         this.error = '';
         const res = await getSubjectQuestionDetail(this.subjectId, order);
-        if(res.status === 200) {
+        if (res.status === 200) {
           this.question = res.data.question;
         } else {
           throw new Error('Cannot load questions');
         }
-      } catch(e) {
+      } catch (e) {
         this.error = e.message;
         console.log(e.message);
       } finally {
         this.isLoading = false;
       }
-    }
+    },
   },
   mounted() {
     this.getQuestion(this.order);
-  }
-}
+  },
+};
 </script>
 
 <style>
@@ -92,5 +97,12 @@ export default {
 .pagination {
   display: flex;
   gap: 10px;
+}
+.q-number {
+  color: #758283;
+  margin-right: 10px;
+}
+.options {
+  padding-left: 50px;
 }
 </style>

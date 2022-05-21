@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light portal-navbar">
+  <nav class="navbar navbar-expand-lg navbar-light portal-navbar mb-3">
     <div class="container">
       <RouterLink to="/" class="navbar-brand">Quiz Platform</RouterLink>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,11 +33,12 @@ export default {
   gap: 10px;
 }
 .portal-navbar {
-  padding: 20px 0px;
+  padding: 12px 0px;
   font-size: 18px;
+  border-bottom: 1px solid #ddd;
 }
 .navbar-brand {
-  font-size: 32px;
+  font-size: 24px;
   margin-right: 50px;
 }
 </style>
