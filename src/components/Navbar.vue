@@ -10,9 +10,13 @@
           <RouterLink to="/" class="nav-link">Home</RouterLink>
           <RouterLink to="/about" class="nav-link">About</RouterLink>
         </div>
-        <div class="navbar-actions">
+        <div v-if="!isAuthenticated" class="navbar-actions">
           <RouterLink to="/auth/login" class="btn btn-outline-primary">Login</RouterLink>
           <RouterLink to="/auth/signup" class="btn btn-outline-success">Signup</RouterLink>
+        </div>
+        <div v-else class="navbar-nav navbar-actions profile">
+          <img class="avatar" src="../assets/Avatar.png" alt="avatar">
+          <RouterLink to="/profile" class="nav-link">Hey Piyush</RouterLink>
         </div>
       </div>
     </div>
@@ -22,7 +26,16 @@
 <script>
 
 export default {
-
+  data() {
+    return {
+      isAuthenticated: false,
+    }
+  },
+  mounted() {
+    if(localStorage.getItem('accessToken')) {
+      this.isAuthenticated = true;
+    };
+  }
 }
 </script>
 
@@ -40,5 +53,17 @@ export default {
 .navbar-brand {
   font-size: 24px;
   margin-right: 50px;
+}
+.profile {
+  cursor: pointer;
+}
+.avatar {
+  height: 35px;
+  width: 35px;
+}
+@media only screen and (max-width: 992px) {
+  .profile {
+    flex-direction: row;
+  }
 }
 </style>
