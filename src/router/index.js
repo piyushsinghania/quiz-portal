@@ -4,16 +4,16 @@ import About from '../views/About.vue'
 import Auth from '../views/Auth.vue'
 import Exams from '../views/Exams.vue'
 import Subjects from '../views/Subjects.vue'
+import Profile from '../views/Profile.vue'
 
 const requireAuth = (to, from, next) => {
-  // if (
-  //   localStorage.getItem("isAuthenticated") === "false" ||
-  //   localStorage.getItem("isAuthenticated") === null
-  // ) {
-  //   next("/auth/login");
-  // } else {
-  //   next();
-  // }
+  let isAuthenticated = false;
+  if(localStorage.getItem('accessToken')) {
+    isAuthenticated = true;
+    next();
+  } else {
+    next("/auth/login");
+  }
 };
 
 const router = createRouter({
@@ -37,13 +37,21 @@ const router = createRouter({
     {
       path: '/subjects',
       name: 'subjects',
-      component: Subjects
+      component: Subjects,
+      beforeEnter: requireAuth,
     },
     {
       path: '/subjects/:subjectId/questions',
       name: 'exams',
       component: Exams,
+      beforeEnter: requireAuth,
       props: true
+    },
+    {
+      path: '/profile',
+      name: 'profile',
+      component: Profile,
+      beforeEnter: requireAuth,
     }
   ]
 })
