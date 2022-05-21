@@ -10,8 +10,19 @@
   </div>
   <Spinner v-else />
   <div v-if="!isLoading" class="d-grid gap-2 d-md-flex justify-content-md-end">
-    <button class="btn btn-outline-success" @click="handlePrev">Prev</button>
-    <button class="btn btn-outline-primary" @click="handleNext">Next</button>
+    <button
+      class="btn btn-outline-success"
+      @click="handlePrev"
+      :class="order === 1 ? 'disabled' : ''"
+    >
+      Prev
+    </button>
+    <button
+      class="btn btn-outline-primary"
+      @click="handleNext"
+    >
+      Next
+    </button>
   </div>
   <p class="error">{{ error }}</p>
 </template>

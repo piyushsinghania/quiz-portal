@@ -2,9 +2,10 @@
   <div class="question-cloud">
     <div
       class="question-number"
+      :class="selected === question.order ? 'active' : ''"
       v-for="question in questions"
       :key="question.id"
-      @click="$emit('updateOrder', question.order)"
+      @click="handleClick(question.order)"
     >
       {{ question.order }}
     </div>
@@ -19,7 +20,22 @@ export default {
   emits: ["updateOrder"],
   data() {
     return {
-      questions: []
+      questions: [],
+      selected: 1,
+    }
+  },
+  watch: {
+    order: {
+      immediate: true,
+      handler(val, oldVal) {
+        this.selected = val;
+      }
+    }
+  },
+  methods: {
+    handleClick(order) {
+      this.selected = order;
+      this.$emit('updateOrder', order);
     }
   },
   async mounted() {
@@ -49,6 +65,10 @@ export default {
   transition: all 0.2s ease-in-out;
 }
 .question-number:hover {
+  background: #35BDD0;
+  color: white;
+}
+.question-number.active {
   background: #35BDD0;
   color: white;
 }
