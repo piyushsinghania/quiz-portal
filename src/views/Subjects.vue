@@ -8,6 +8,7 @@
         :key="subject.id"
       />
     </div>
+    <Spinner v-else />
     <p class="error">{{ error }}</p>
   </div>
 </template>
@@ -15,6 +16,7 @@
 <script>
 import Navbar from '../components/Navbar.vue'
 import Subject from '../components/Subject.vue'
+import Spinner from '../components/Spinner.vue'
 import { getSubjects } from '../api/index'
 
 export default {
@@ -28,7 +30,8 @@ export default {
   },
   components: {
     Navbar,
-    Subject
+    Subject,
+    Spinner
   },
   async mounted() {
     try {
