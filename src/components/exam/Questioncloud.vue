@@ -2,18 +2,17 @@
   <div class="question-cloud">
     <router-link class="question-number" class-active="active" to="#" exact>1</router-link>
     <router-link class="question-number" class-active="active" to="#" exact>2</router-link>
-    <router-link class="question-number" class-active="active" to="#" exact>3</router-link>
-    <router-link class="question-number" class-active="active" to="#" exact>4</router-link>
-    <router-link class="question-number" class-active="active" to="#" exact>5</router-link>
-    <router-link class="question-number" class-active="active" to="#" exact>6</router-link>
-    <router-link class="question-number" class-active="active" to="#" exact>7</router-link>
-    <router-link class="question-number" class-active="active" to="#" exact>8</router-link>
   </div>
 </template>
 
 <script>
-export default {
+import { getSubjectQuestions } from '../../api/index'
 
+export default {
+  props: ['subjectId'],
+  async mounted() {
+     const res = await getSubjectQuestions()
+  }
 }
 </script>
 
@@ -22,6 +21,8 @@ export default {
   display: flex;
   flex-direction: row;
   gap: 15px;
+  margin: 50px auto;
+  box-sizing: border-box;
   flex-wrap: wrap;
 }
 .question-number {

@@ -1,7 +1,4 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light portal-navbar">
-    <span class="navbar-brand">Quiz Platform</span>
-  </nav>
   <div class="questions" v-if="!isLoading">
     <h4 class="my-3">{{ question.question_text }}</h4>
     <div class="form-check mt-3" v-for="option in question.question_options">

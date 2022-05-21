@@ -1,7 +1,16 @@
 <template>
   <div class="container">
-    <QuizExam :subjectId="subjectId" />
-    <Questioncloud class="questions-bar" />
+    <nav class="navbar navbar-expand-lg navbar-light portal-navbar">
+      <span class="navbar-brand">Quiz Platform</span>
+    </nav>
+    <div class="row">
+      <div class="col-sm-12 col-lg-9">
+        <QuizExam :subjectId="subjectId" />
+      </div>
+      <div class="col-sm-12 col-lg-3">
+        <Questioncloud :subjectId="subjectId" />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -25,10 +34,6 @@ export default {
 
 <style>
 .questions-bar {
-  position: fixed;
-  /* border: 2px solid red; */
-  top: 150px;
-  right: 50px;
-  max-width: 300px;
+
 }
 </style>
