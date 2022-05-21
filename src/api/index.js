@@ -9,3 +9,9 @@ export const login = (data) => http.post('/auth/login/', data);
 export const getSubjects = () => http.get('/exams/subjects/');
 
 export const getSubjectQuestions = (subjectId) => http.get(`/exams/subjects/${subjectId}/questions`);
+
+export const getSubjectQuestionDetail = (subjectId, order = 1) => http.get(`/exams/subjects/${subjectId}/questions/detail`, {
+  params: {
+    order
+  }
+});
