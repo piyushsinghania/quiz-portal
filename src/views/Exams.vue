@@ -1,24 +1,26 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light portal-navbar mb-3">
-    <div class="container">
-      <span class="navbar-brand">Quiz Platform</span>
-    </div>
-  </nav>
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-12 col-lg-9">
-        <QuizExam
-          :subjectId="subjectId"
-          :order="order"
-          @updateOrder="handleChange"
-        />
+  <div id="quizsection" ref="quizsection">
+    <nav class="navbar navbar-expand-lg navbar-light portal-navbar mb-3">
+      <div class="container">
+        <span class="navbar-brand">Quiz Platform</span>
       </div>
-      <div class="col-sm-12 col-lg-3">
-        <Questioncloud
-          :subjectId="subjectId"
-          :order="order"
-          @updateOrder="handleChange"
-        />
+    </nav>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12 col-lg-9">
+          <QuizExam
+            :subjectId="subjectId"
+            :order="order"
+            @updateOrder="handleChange"
+          />
+        </div>
+        <div class="col-sm-12 col-lg-3">
+          <Questioncloud
+            :subjectId="subjectId"
+            :order="order"
+            @updateOrder="handleChange"
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -45,8 +47,27 @@ export default {
     }
   },
   props: ['subjectId'],
+  mounted() {
+    const elem = this.$refs.quizsection;
+    if (elem.requestFullscreen) {
+      elem.requestFullscreen();
+    } else if (elem.webkitRequestFullscreen) {
+      elem.webkitRequestFullscreen();
+    } else if (elem.msRequestFullscreen) {
+      elem.msRequestFullscreen();
+    }
+  }
 }
 </script>
 
 <style>
+#quizsection:fullscreen {
+  background-color: white;
+}
+#quizsection:-webkit-full-screen {
+  background: white;
+}
+#quizsection:-moz-full-screen {
+  background: white;
+}
 </style>
