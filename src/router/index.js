@@ -5,6 +5,7 @@ import Auth from '../views/Auth.vue'
 import Exams from '../views/Exams.vue'
 import Subjects from '../views/Subjects.vue'
 import Profile from '../views/Profile.vue'
+import Report from '../views/Report.vue'
 
 const requireAuth = (to, from, next) => {
   let isAuthenticated = false;
@@ -51,6 +52,12 @@ const router = createRouter({
       path: '/profile',
       name: 'profile',
       component: Profile,
+      beforeEnter: requireAuth,
+    },
+    {
+      path: '/report',
+      name: 'report',
+      component: Report,
       beforeEnter: requireAuth,
     }
   ]
