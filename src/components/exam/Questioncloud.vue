@@ -4,7 +4,7 @@
       class="question-number"
       v-for="question in questions"
       :key="question.id"
-      @click="$emit('changeQuestion', question.order)"
+      @click="$emit('updateOrder', question.order)"
     >
       {{ question.order }}
     </div>
@@ -15,7 +15,8 @@
 import { getSubjectQuestions } from '../../api/index'
 
 export default {
-  props: ['subjectId'],
+  props: ['subjectId', 'order'],
+  emits: ["updateOrder"],
   data() {
     return {
       questions: []

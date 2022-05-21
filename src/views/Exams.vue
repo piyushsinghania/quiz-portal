@@ -5,10 +5,18 @@
     </nav>
     <div class="row">
       <div class="col-sm-12 col-lg-9">
-        <QuizExam :subjectId="subjectId" :order="order" />
+        <QuizExam
+          :subjectId="subjectId"
+          :order="order"
+          @updateOrder="handleChange"
+        />
       </div>
       <div class="col-sm-12 col-lg-3">
-        <Questioncloud @changeQuestion="handleChange" :subjectId="subjectId" />
+        <Questioncloud
+          :subjectId="subjectId"
+          :order="order"
+          @updateOrder="handleChange"
+        />
       </div>
     </div>
   </div>
@@ -39,7 +47,4 @@ export default {
 </script>
 
 <style>
-.questions-bar {
-
-}
 </style>

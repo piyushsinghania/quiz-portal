@@ -26,29 +26,35 @@ export default {
     Navbar,
     Spinner
   },
-  props: ['subjectId'],
+  props: ['subjectId', 'order'],
   data() {
     return {
-      order: 1,
       isLoading: false,
       error: '',
       question: {}
     }
   },
+  emits: ["updateOrder"],
+  watch: {
+    order: {
+      immediate: true,
+      handler(val, oldVal) {
+        this.getQuestion(val)
+      }
+    }
+  },
   methods: {
     handleNext() {
-      this.order += 1;
-      this.getQuestion();
+      this.$emit('updateOrder', this.order + 1)
     },
     handlePrev() {
-      this.order -= 1;
-      this.getQuestion();
+      this.$emit('updateOrder', this.order - 1)
     },
-    async getQuestion() {
+    async getQuestion(order) {
       try {
         this.isLoading = true;
         this.error = '';
-        const res = await getSubjectQuestionDetail(this.subjectId, this.order);
+        const res = await getSubjectQuestionDetail(this.subjectId, order);
         if(res.status === 200) {
           this.question = res.data.question;
         } else {
@@ -63,7 +69,7 @@ export default {
     }
   },
   mounted() {
-    this.getQuestion();
+    this.getQuestion(this.order);
   }
 }
 </script>
