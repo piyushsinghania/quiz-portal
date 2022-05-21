@@ -1,7 +1,13 @@
 <template>
   <div class="question-cloud">
-    <router-link class="question-number" class-active="active" to="#" exact>1</router-link>
-    <router-link class="question-number" class-active="active" to="#" exact>2</router-link>
+    <div
+      class="question-number"
+      v-for="question in questions"
+      :key="question.id"
+      @click="$emit('changeQuestion', question.order)"
+    >
+      {{ question.order }}
+    </div>
   </div>
 </template>
 
@@ -10,8 +16,14 @@ import { getSubjectQuestions } from '../../api/index'
 
 export default {
   props: ['subjectId'],
+  data() {
+    return {
+      questions: []
+    }
+  },
   async mounted() {
-     const res = await getSubjectQuestions()
+     const res = await getSubjectQuestions(this.subjectId);
+     this.questions = res.data;
   }
 }
 </script>

@@ -5,10 +5,10 @@
     </nav>
     <div class="row">
       <div class="col-sm-12 col-lg-9">
-        <QuizExam :subjectId="subjectId" />
+        <QuizExam :subjectId="subjectId" :order="order" />
       </div>
       <div class="col-sm-12 col-lg-3">
-        <Questioncloud :subjectId="subjectId" />
+        <Questioncloud @changeQuestion="handleChange" :subjectId="subjectId" />
       </div>
     </div>
   </div>
@@ -26,6 +26,12 @@ export default {
   data() {
     return {
       questions: [],
+      order: 1,
+    }
+  },
+  methods: {
+    handleChange(order) {
+      this.order = order
     }
   },
   props: ['subjectId'],

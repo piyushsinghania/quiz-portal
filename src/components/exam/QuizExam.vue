@@ -51,7 +51,6 @@ export default {
         const res = await getSubjectQuestionDetail(this.subjectId, this.order);
         if(res.status === 200) {
           this.question = res.data.question;
-          console.log(res);
         } else {
           throw new Error('Cannot load questions');
         }
