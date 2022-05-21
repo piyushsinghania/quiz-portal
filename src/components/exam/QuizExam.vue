@@ -27,7 +27,12 @@
     >
       Prev
     </button>
-    <button class="btn btn-outline-primary" @click="handleNext">Next</button>
+    <button
+      class="btn btn-outline-primary"
+      @click="handleNext"
+    >
+      {{ true ? 'Next' : 'Submit'}}
+    </button>
   </div>
   <p class="error">{{ error }}</p>
 </template>

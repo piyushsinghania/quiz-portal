@@ -39,8 +39,16 @@ export default {
     }
   },
   async mounted() {
-     const res = await getSubjectQuestions(this.subjectId);
-     this.questions = res.data;
+    try {
+      const res = await getSubjectQuestions(this.subjectId);
+      if(res.status === 200) {
+        this.questions = res.data;
+      } else {
+        throw new Error("Failed to load questions");
+      }
+    } catch(e) {
+      console.log(e.message);
+    }
   }
 }
 </script>
