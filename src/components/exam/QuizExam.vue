@@ -1,5 +1,5 @@
 <template>
-  <div class="container" v-if="!isLoading">
+  <div class="container" v-if="!isLoading && question.question_text">
     <h4 class="my-3">
       <span class="q-number"> Q. {{ question.order }}&#41; </span>
       {{ question.question_text }}
@@ -18,8 +18,8 @@
       </div>
     </div>
   </div>
-  <Spinner v-else />
-  <div v-if="!isLoading" class="d-grid gap-2 d-md-flex justify-content-md-end">
+  <Spinner v-if="isLoading" />
+  <div v-if="!isLoading && question.question_text" class="d-grid gap-2 d-md-flex justify-content-md-end">
     <button
       class="btn btn-outline-success"
       @click="handlePrev"
@@ -34,7 +34,7 @@
       {{ true ? 'Next' : 'Submit'}}
     </button>
   </div>
-  <p class="error">{{ error }}</p>
+  <p class="error my-3">{{ error }}</p>
 </template>
 
 <script>
