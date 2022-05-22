@@ -35,7 +35,7 @@
       Next
     </button>
     <button
-      class="btn btn-success"
+      class="btn btn-primary"
       @click="handleSubmit"
       v-if="questionList.length === order"
     >
