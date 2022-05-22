@@ -30,8 +30,16 @@
     <button
       class="btn btn-outline-primary"
       @click="handleNext"
+      v-if="questionList.length !== order"
     >
-      {{ true ? 'Next' : 'Submit'}}
+      Next
+    </button>
+    <button
+      class="btn btn-success"
+      @click="handleSubmit"
+      v-if="questionList.length === order"
+    >
+      Submit
     </button>
   </div>
   <p class="error my-3">{{ error }}</p>
@@ -47,7 +55,7 @@ export default {
     Navbar,
     Spinner,
   },
-  props: ['subjectId', 'order'],
+  props: ['subjectId', 'order', 'questionList'],
   data() {
     return {
       isLoading: false,
@@ -70,6 +78,9 @@ export default {
     },
     handlePrev() {
       this.$emit('updateOrder', this.order - 1);
+    },
+    handleSubmit() {
+      this.$router.push({ name: 'report'})
     },
     async getQuestion(order) {
       try {

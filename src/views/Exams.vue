@@ -11,13 +11,14 @@
           <QuizExam
             :subjectId="subjectId"
             :order="order"
+            :questionList="questionList"
             @updateOrder="handleChange"
           />
         </div>
         <div class="col-sm-12 col-lg-3">
           <Questioncloud
-            :subjectId="subjectId"
             :order="order"
+            :questionList="questionList"
             @updateOrder="handleChange"
           />
         </div>
@@ -29,6 +30,7 @@
 <script>
 import QuizExam from '../components/exam/QuizExam.vue'
 import Questioncloud from '../components/exam/Questioncloud.vue'
+import { getSubjectQuestions } from '../api/index'
 
 export default {
   components: {
@@ -38,6 +40,7 @@ export default {
   data() {
     return {
       questions: [],
+      questionList: [],
       order: 1,
     }
   },
@@ -47,7 +50,18 @@ export default {
     }
   },
   props: ['subjectId'],
-  mounted() {
+  async mounted() {
+    try {
+      const res = await getSubjectQuestions(this.subjectId);
+      if(res.status === 200) {
+        this.questionList = res.data;
+      } else {
+        throw new Error("Failed to load questions");
+      }
+    } catch(e) {
+      console.log(e.message);
+    }
+
     const elem = this.$refs.quizsection;
     if (elem.requestFullscreen) {
       elem.requestFullscreen();

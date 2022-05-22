@@ -2,8 +2,8 @@
   <div class="question-cloud">
     <div
       class="question-number"
+      v-for="question in questionList"
       :class="selected === question.order ? 'active' : ''"
-      v-for="question in questions"
       :key="question.id"
       @click="handleClick(question.order)"
     >
@@ -13,14 +13,12 @@
 </template>
 
 <script>
-import { getSubjectQuestions } from '../../api/index'
 
 export default {
-  props: ['subjectId', 'order'],
+  props: ['order', 'questionList'],
   emits: ["updateOrder"],
   data() {
     return {
-      questions: [],
       selected: 1,
     }
   },
@@ -36,18 +34,6 @@ export default {
     handleClick(order) {
       this.selected = order;
       this.$emit('updateOrder', order);
-    }
-  },
-  async mounted() {
-    try {
-      const res = await getSubjectQuestions(this.subjectId);
-      if(res.status === 200) {
-        this.questions = res.data;
-      } else {
-        throw new Error("Failed to load questions");
-      }
-    } catch(e) {
-      console.log(e.message);
     }
   }
 }
