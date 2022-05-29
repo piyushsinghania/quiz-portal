@@ -15,3 +15,9 @@ export const getSubjectQuestionDetail = (subjectId, order = 1) => http.get(`/exa
     order
   }
 });
+
+export const postResponse = (questionId, optionId) => http.get(`/exams/questions/${questionId}/response/`, {
+  params: {
+    option_id: optionId
+  }
+})

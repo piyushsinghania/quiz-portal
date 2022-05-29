@@ -8,9 +8,11 @@
       <div class="form-check mt-3" v-for="option in question.question_options">
         <input
           class="form-check-input"
-          type="checkbox"
+          type="radio"
+          :name="question.order"
           :value="option.option_text"
           :id="option.id"
+          @change="handleResponse(option)"
         />
         <label class="form-check-label" :for="option.id">
           {{ option.option_text }}
@@ -48,7 +50,7 @@
 <script>
 import Navbar from '../Navbar.vue';
 import Spinner from '../Spinner.vue';
-import { getSubjectQuestionDetail } from '../../api/index';
+import { getSubjectQuestionDetail, postResponse } from '../../api/index';
 
 export default {
   components: {
@@ -99,6 +101,9 @@ export default {
         this.isLoading = false;
       }
     },
+    handleResponse(option) {
+      postResponse(this.question.id, option.id);
+    }
   },
   mounted() {
     this.getQuestion(this.order);
