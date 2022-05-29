@@ -2,7 +2,13 @@
   <Navbar />
   <div class="container">
     <div class="hero">
-      <p>This is Report Page</p>
+      <div class="hero-details">
+        <h2 class="my-md-3">Report</h2>
+        <p class="my-md-3">You haven't appeared any exams yet</p>
+      </div>
+      <div class="hero-img">
+        <img class="hero-img" src="../assets/report.png" alt="">
+      </div>
     </div>
   </div>
 </template>

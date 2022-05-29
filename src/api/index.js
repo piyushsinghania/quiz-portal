@@ -6,6 +6,8 @@ export const http = axios.create({
 
 export const login = (data) => http.post('/auth/login/', data);
 
+export const getProfileDetails = () => http.get('/auth/profile/')
+
 export const getSubjects = () => http.get('/exams/subjects/');
 
 export const getSubjectQuestions = (subjectId) => http.get(`/exams/subjects/${subjectId}/questions/`);

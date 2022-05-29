@@ -12,6 +12,7 @@
           :name="question.order"
           :value="option.option_text"
           :id="option.id"
+          :checked="existingResponse ? existingResponse.id === option.id : false"
           @change="handleResponse(option)"
         />
         <label class="form-check-label" :for="option.id">
@@ -63,6 +64,7 @@ export default {
       isLoading: false,
       error: '',
       question: {},
+      existingResponse: {},
     };
   },
   emits: ['updateOrder'],
@@ -91,6 +93,7 @@ export default {
         const res = await getSubjectQuestionDetail(this.subjectId, order);
         if (res.status === 200) {
           this.question = res.data.question;
+          this.existingResponse = res.data.existing_response_option;
         } else {
           throw new Error('Cannot load questions');
         }
@@ -104,9 +107,6 @@ export default {
     handleResponse(option) {
       postResponse(this.question.id, option.id);
     }
-  },
-  mounted() {
-    this.getQuestion(this.order);
   },
 };
 </script>
