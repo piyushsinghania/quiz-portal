@@ -5,7 +5,7 @@
       <div class="hero-details" v-if="!loading && !error">
         <h2 class="my-md-3">Report</h2>
         <h5 class="my-md-3">Subject : {{ subject.title }}</h5>
-        <h5 class="my-md-3">Score : {{ score }}</h5>
+        <h5 class="my-md-3">Score : {{ score }} / {{ totalScore }}</h5>
       </div>
       <div class="hero-details" v-else-if="error">
         <p>{{ error }}</p>
@@ -31,6 +31,7 @@ export default {
   data() {
     return {
       score: 0,
+      totalScore : 10,
       subject: {},
       error: '',
       loading: false,
@@ -44,6 +45,7 @@ export default {
       const scoreRes = await getReport(this.$route.params.id);
       if(subjectRes.status === 200 && scoreRes.status === 200) {
         this.score = scoreRes.data.score || 0;
+        this.totalScore = scoreRes.data.total_score || 10;
         this.subject = subjectRes.data;
       } else {
         throw new Error("Failed to fetch details")
