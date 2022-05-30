@@ -39,10 +39,11 @@ export default {
   async mounted() {
     try {
       this.loading = true;
+      this.error = '';
       const subjectRes = await getSubjectDetails(this.$route.params.id);
       const scoreRes = await getReport(this.$route.params.id);
       if(subjectRes.status === 200 && scoreRes.status === 200) {
-        this.score = scoreRes.data.score;
+        this.score = scoreRes.data.score || 0;
         this.subject = subjectRes.data;
       } else {
         throw new Error("Failed to fetch details")

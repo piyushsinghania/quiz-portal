@@ -8,13 +8,14 @@
       <label for="password" class="form-label">Password</label>
       <input type="password" class="form-control" required id="password" v-model="password" />
     </div>
-    <div class="error">{{ error }}</div>
+    <div class="error my-3">{{ error }}</div>
     <button class="btn form-btn w-100 mb-3" :class="isLoading ? 'disabled' : ''">Log in</button>
   </form>
 </template>
 
 <script>
 import { login, http } from '../../api/index'
+import { getProfileDetails } from '../../api/index'
 
 export default {
   data() {
@@ -40,6 +41,9 @@ export default {
         localStorage.setItem('accessToken', JSON.stringify(data.access_token))
         http.defaults.headers.common['Authorization'] =
           `Bearer ${data.access_token}`
+
+        const res = await getProfileDetails();
+        localStorage.setItem('studentName', JSON.stringify(res.data.full_name.replace(/ .*/,'')));
 
         this.$router.push({ name: 'subjects' })
       } catch(e) {
