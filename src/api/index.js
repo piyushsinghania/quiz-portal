@@ -23,3 +23,6 @@ export const postResponse = (questionId, optionId) => http.get(`/exams/questions
     option_id: optionId
   }
 })
+
+export const getSubjectDetails = (subjectId) => http.get(`/exams/subjects/${subjectId}/`);
+export const getReport = (subjectId) => http.get(`/exams/subjects/${subjectId}/score`);

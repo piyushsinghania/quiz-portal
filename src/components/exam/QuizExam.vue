@@ -84,7 +84,7 @@ export default {
       this.$emit('updateOrder', this.order - 1);
     },
     handleSubmit() {
-      this.$router.push({ name: 'report'})
+      this.$router.push(`/report/${this.subjectId}`)
     },
     async getQuestion(order) {
       try {

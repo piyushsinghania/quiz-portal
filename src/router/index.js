@@ -55,7 +55,7 @@ const router = createRouter({
       beforeEnter: requireAuth,
     },
     {
-      path: '/report',
+      path: '/report/:id',
       name: 'report',
       component: Report,
       beforeEnter: requireAuth,
